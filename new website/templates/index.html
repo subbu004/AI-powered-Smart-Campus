@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>The American College</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='index.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='chat.css') }}">
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+    <img src="{{ url_for('static', filename='images/logo.jpeg') }}" class="logo">
+    <h1>The American College</h1>
+</header>
+
+<!-- NAVIGATION -->
+<nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Academics</a>
+    <a href="#">Admissions</a>
+    <a href="#">Contact</a>
+</nav>
+
+<!-- PRINCIPAL SECTION -->
+<section class="principal-section">
+    <div class="principal-overlay">
+        <div class="principal-card">
+            <img src="{{ url_for('static', filename='images/principal.jpeg') }}" class="principal-img">
+            <h3>Dr. Paul Jayakar</h3>
+            <p class="designation">Principal, The American College</p>
+            <p class="message">
+                Welcome to The American College. Our mission is to empower students
+                with excellence, discipline, and innovation.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- LOGIN CARDS -->
+<section class="card-section">
+    <a href="{{ url_for('student_login') }}" class="card">🎓 Student Login</a>
+    <a href="{{ url_for('staff_login') }}" class="card">👩‍🏫 Staff Login</a>
+</section>
+
+<!-- NEWS & EVENTS -->
+<section class="updates-section">
+
+    <!-- DAILY NEWS -->
+    <div class="update-card">
+        <h2>📰 Daily News</h2>
+        <div class="update-list">
+            {% for n in news %}
+                <div class="update-item">
+                    <span class="update-title">{{ n[0] }}</span>
+                    <p>{{ n[1] }}</p>
+                </div>
+            {% else %}
+                <p class="empty">No news available</p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- EVENTS -->
+    <div class="update-card">
+        <h2>📅 Events</h2>
+        <div class="update-list">
+            {% for e in events %}
+                <div class="update-item">
+                    <span class="update-title">{{ e[0] }}</span>
+                    <p>{{ e[1] }}</p>
+                </div>
+            {% else %}
+                <p class="empty">No upcoming events</p>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+<!-- FOOTER -->
+<footer>
+    © 2026 The American College | Madurai
+</footer>
+
+<!-- CHATBOT -->
+<div id="chat-toggle" onclick="toggleChat()">💬</div>
+
+<div class="chat-container" id="chatbot">
+    <div class="chat-header">
+        🎓 College AI Assistant
+        <span onclick="toggleChat()">✖</span>
+    </div>
+
+    <div class="chat-box" id="answer">
+        <div class="bot-message">
+            Hi 👋 I am WizBot – Your Smart Campus Assistant.
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input id="question" placeholder="Ask something...">
+        <button onclick="send()">➤</button>
+    </div>
+</div>
+
+<script src="{{ url_for('static', filename='chat.js') }}"></script>
+
+</body>
+</html>
